@@ -172,13 +172,13 @@ This test was a positive case, so we expected to get something out of this run. 
 
 ```shell
 $> ./philo
-Wrong number of arguments: must be four of five.
+Wrong number of arguments: must be four or five.
 $> ./philo 4
-Wrong number of arguments: must be four of five.
+Wrong number of arguments: must be four or five.
 $> ./philo 4 100
-Wrong number of arguments: must be four of five.
+Wrong number of arguments: must be four or five.
 $> ./philo 4 100 100
-Wrong number of arguments: must be four of five.
+Wrong number of arguments: must be four or five.
 $> ./philo 4 100 100 100
 0 2 has taken a fork
 0 2 has taken a fork
@@ -200,9 +200,9 @@ $> ./philo 4 100 100 100 5
 0 4 is eating
 100 1 died
 $> ./philo 4 100 100 100 5 5
-Wrong number of arguments: must be four of five.
+Wrong number of arguments: must be four or five.
 $> ./philo 4 100 100 100 5 5 5
-Wrong number of arguments: must be four of five.
+Wrong number of arguments: must be four or five.
 ```
 In this code the `argc` was well defined (i.e. `argc == 5 || argc == 6`) so no surprises came to us, but one should test these cases nonetheless because they are still prone to segmentation faults.
 
