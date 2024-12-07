@@ -12,8 +12,8 @@ This document is not a substitute for your own critical thinking. This guideline
 
 ## Index
 (under construction)
-1. [Makefile](https://github.com/FjjDessoyCaraballo/guideline_for_evals/edit/main/README.md#1-makefile);
-3. [Illegal stuff](https://github.com/FjjDessoyCaraballo/guideline_for_evals/edit/main/README.md#2-illegal-stuff);
+1. [Makefile](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#1-makefile);
+3. [Illegal stuff](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#2-illegal-stuff);
 
 
 ### General Guidelines for evaluations
