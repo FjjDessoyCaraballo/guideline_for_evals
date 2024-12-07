@@ -14,7 +14,7 @@ This document is not a substitute for your own critical thinking. This guideline
 (under construction)
 1. [Makefile](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#1-makefile);
 2. [Illegal stuff](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#2-illegal-stuff);
-3. Input sanitization
+3. [Input sanitization](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#3-input-sanitization);
 
 
 ### General Guidelines for evaluations
