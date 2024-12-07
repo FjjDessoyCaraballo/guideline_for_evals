@@ -1,9 +1,19 @@
 # Guideline for evals
 
+## Introduction
+
+These guidelines are designed for Hive Helsinki students, but it can be extended for any school in the 42 Network. It is a tool to help and guide evaluations, covering **some** edge cases for some of the projects of the common core, but it obviously does not cover the entirety of the edge cases of the projects. It should also offer somewhat of a safer embark to the new students that are not quite sure of some of the things to be tested.
+
+In here, you will find basic things to be tested (compilation with makefile, number of arguments, etc) and **some** edge cases to help you understand what to test FOR YOURSELF!
+
+## Disclaimer
+
+This document is not a substitute for your own critical thinking. This guideline is mostly an auxiliary tool for those who are going through a project that contains topics that were not visited yet; or just a little list with reminders of stuff to be checking for. However, as said, this is no substitute for your own tests and critical thinking.
+
 ## Index
 (under construction)
-1. Makefile
-2. Illegal stuff;
+1. [Makefile](https://github.com/FjjDessoyCaraballo/guideline_for_evals/edit/main/README.md#1-makefile);
+3. [Illegal stuff](https://github.com/FjjDessoyCaraballo/guideline_for_evals/edit/main/README.md#2-illegal-stuff);
 
 
 ### General Guidelines for evaluations
