@@ -13,7 +13,8 @@ This document is not a substitute for your own critical thinking. This guideline
 ## Index
 (under construction)
 1. [Makefile](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#1-makefile);
-3. [Illegal stuff](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#2-illegal-stuff);
+2. [Illegal stuff](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#2-illegal-stuff);
+3. Input sanitization
 
 
 ### General Guidelines for evaluations
@@ -133,3 +134,100 @@ $>
 ```
 
 The result of the command is showing us that this project used `write()`, `wait()`, `malloc()`, `perror()`, `exit()`, and other functions. If you find functions that are not supposed to be there, that is hardly arguable and definitely a failure.
+
+#### 3. Input sanitization
+
+This section will be limited because it needs context most of the times. Therefore we are going through just two input handlings: number of arguments and sanitizing the argument values.
+
+##### 3.1. Number of arguments
+
+This is a rather easy check. So easy that some people writing their codes overlook it. As you pass from testing the makefile, you may want to dedicate two minutes to see the behavior of the code when given a handful of wrong arguments. To illustrate, we shall use the philosophers project as an example, which takes 4 to 5 arguments:
+
+```shell
+$>  ./philo 5 310 200 100
+0 1 is thinking
+0 5 is thinking
+0 2 has taken a fork
+0 2 has taken a fork
+0 2 is eating
+0 3 is thinking
+0 4 has taken a fork
+0 4 has taken a fork
+0 4 is eating
+20 5 has taken a fork
+200 4 is sleeping
+200 2 is sleeping
+200 5 has taken a fork
+200 5 is eating
+200 1 has taken a fork
+200 3 has taken a fork
+200 3 has taken a fork
+200 3 is eating
+300 4 is thinking
+300 2 is thinking
+310 1 died
+$> 
+```
+This test was a positive case, so we expected to get something out of this run. But what happens when we start messing with it?
+
+```shell
+$> ./philo
+Wrong number of arguments: must be four of five.
+$> ./philo 4
+Wrong number of arguments: must be four of five.
+$> ./philo 4 100
+Wrong number of arguments: must be four of five.
+$> ./philo 4 100 100
+Wrong number of arguments: must be four of five.
+$> ./philo 4 100 100 100
+0 2 has taken a fork
+0 2 has taken a fork
+0 2 is eating
+0 1 is thinking
+0 3 is thinking
+0 4 has taken a fork
+0 4 has taken a fork
+0 4 is eating
+100 3 died
+$> ./philo 4 100 100 100 5
+0 3 is thinking
+0 2 has taken a fork
+0 2 has taken a fork
+0 2 is eating
+0 1 is thinking
+0 4 has taken a fork
+0 4 has taken a fork
+0 4 is eating
+100 1 died
+$> ./philo 4 100 100 100 5 5
+Wrong number of arguments: must be four of five.
+$> ./philo 4 100 100 100 5 5 5
+Wrong number of arguments: must be four of five.
+```
+In this code the `argc` was well defined (i.e. `argc == 5 || argc == 6`) so no surprises came to us, but one should test these cases nonetheless because they are still prone to segmentation faults.
+
+##### 3.2. Sanitizing the argument values
+
+The type of arguments that your code can take is somewhat of a broad problem to solve, and it highly depends on context of the project that you have. However, you can check for a few shortcomings, such as trying to open directories instead of files, taking arguments in quotes, integer overflows, etc.
+
+Lets consider that this project is about a specific program that takes a file, like the so_long project. Our file must be a `.ber` file, and this is already one thing to be testing:
+
+- test for syntax of the file (map1.ber, .bermap1, map1ber, .mabep1r...);
+- integrity of the file (empty file, too big of a file...);
+- name a directory with ending with `.ber`;
+
+These tests are a good way of testing how the input was parsed. If the project involves reading a file, it means that there will be a world of checks to be done by you and by the "evaluatee", like permissions and accessibility of the file.
+
+Other times the input can be simply strings or numbers. This is the moment for you to test with basic things, such as `INT_MAX`, `INT_MIN`, and other stuff:
+
+```terminal
+$> ./push_swap 2147483647 −2147483648
+sa
+$> ./push_swap 2147483648 −2147483648
+Error
+$> ./push_swap 2147483647 −2147483649
+Error
+$> ./push_swap 1 -0 2
+sa
+```
+(under work)
