@@ -17,14 +17,11 @@ This document is not a substitute for your own critical thinking. This guideline
 3. [Input sanitization](https://github.com/FjjDessoyCaraballo/guideline_for_evals/blob/main/README.md#3-input-sanitization);
 
 
-### General Guidelines for evaluations
-
-For most times, you will be evaluating a program that will require input of all sorts. Below you will find a list of simple tests for basic things that should remain constant throughout the curriculum.
-
-#### 1. Makefile
+___
+## 1. Makefile
 
 Makefile is perhaps the most important part because it compiles the whole project together.
-##### 1.1. Makefile - simply making
+### 1.1. Makefile - simply making
 
 This is the get go of every evaluation, because if the project cannot be made, it's an automatic failure. Therefore we should test the rules and possibility of relinking in the Makefile:
 
@@ -42,7 +39,7 @@ $> make all
 ```
 
 If all of these are returning a compiled project, then you should be able to move forward for more testing. However, if you find problems, you may need to read the Makefile more closely.
-##### 1.2. Makefile - checking rules
+### 1.2. Makefile - checking rules
 
 Another simple set here is to run the necessary rules for almost all projects: `clean`, `fclean`, and `re`.  Try running multiple rules, such as:
 
@@ -50,7 +47,7 @@ Another simple set here is to run the necessary rules for almost all projects: `
 $> make all clean
 ```
 
-##### 1.3. Makefile - relinking
+### 1.3. Makefile - relinking
 
 Checking for relinking can be simple if the user has not inserted `@` into the rules actions. But even if that is the case and you see that it only displays messages that are the result of an `echo`, you can run the command `make -n` (check the end of the item for what it does) before and after actually running make:
 
@@ -82,16 +79,17 @@ The specific thing one has to look at here is what the positive case shows in th
 
 - `Make -n`: This specific command is doing a "dry-run" on your Makefile. In lay-mans terms, it means that it's showing what it would do, without actually doing it.
 
-##### 1.4. Makefile - must haves
+### 1.4. Makefile - must haves
 
 This one is covered by the previous steps, but one must be completely sure of what is going on under the hood. For that, go to the Makefile and read it properly to see that `all`, `fclean`, `clean`, and `re` are all there and that there is a `$(NAME)` executable.
 
 Yes, the executable has have a rule `$(NAME)` and not `$(EXECUTABLE)`, or anything else. Moreover, check that the command `.PHONY` targets are all there (`all`, `re`, `clean`, `fclean`).
 
 Last, but not least, the Makefile must be with capital `M` as a established standard in the industry.
-#### 2. Illegal stuff
+____
+## 2. Illegal stuff
 
-##### 2.1. Checking for not allowed functions
+### 2.1. Checking for not allowed functions
 
 If you have a big project ahead of you, it will be hard to check every single function that has been used throughout it. For that, one can search for specific functions in VS Code for `strlen()` and whatnot. However, there is an easier way: `nm -u`.
 
@@ -134,12 +132,12 @@ $>
 ```
 
 The result of the command is showing us that this project used `write()`, `wait()`, `malloc()`, `perror()`, `exit()`, and other functions. If you find functions that are not supposed to be there, that is hardly arguable and definitely a failure.
-
-#### 3. Input sanitization
+____
+## 3. Input sanitization
 
 This section will be limited because it needs context most of the times. Therefore we are going through just two input handlings: number of arguments and sanitizing the argument values.
 
-##### 3.1. Number of arguments
+### 3.1. Number of arguments
 
 This is a rather easy check. So easy that some people writing their codes overlook it. As you pass from testing the makefile, you may want to dedicate two minutes to see the behavior of the code when given a handful of wrong arguments. To illustrate, we shall use the philosophers project as an example, which takes 4 to 5 arguments:
 
@@ -206,7 +204,7 @@ Wrong number of arguments: must be four or five.
 ```
 In this code the `argc` was well defined (i.e. `argc == 5 || argc == 6`) so no surprises came to us, but one should test these cases nonetheless because they are still prone to segmentation faults.
 
-##### 3.2. Sanitizing the argument values
+### 3.2. Sanitizing the argument values
 
 The type of arguments that your code can take is somewhat of a broad problem to solve, and it highly depends on context of the project that you have. However, you can check for a few shortcomings, such as trying to open directories instead of files, taking arguments in quotes, integer overflows, etc.
 
